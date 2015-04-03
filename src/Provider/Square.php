@@ -2,6 +2,7 @@
 
 namespace Wheniwork\OAuth2\Client\Provider;
 
+use Wheniwork\OAuth2\Client\Grant\AuthorizationCode;
 use Wheniwork\OAuth2\Client\Grant\RenewToken;
 
 use Guzzle\Http\Exception\BadResponseException;
@@ -91,6 +92,8 @@ class Square extends AbstractProvider
 
         if (is_string($grant) && $grant === 'renew_token') {
             $grant = new RenewToken();
+        } elseif (is_string($grant) && $grant === 'authorization_code') {
+            $grant = new AuthorizationCode();
         }
 
         if (!($grant instanceof RenewToken)) {
